@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр конректного персонажа</title>
+</head>
+<body>
+<p th:text="${'Id: ' + person.getId()}">Person's Id</p>
+<p th:text="${'FullName: ' + person.getFullName()}">Person's FullName</p>
+<p th:text="${'DateBirth: ' + person.getDateBirth()}">Person's DateBirth</p>
+<br>
+<a th:href="@{/person/{id}/update(id=${person.getId()})}">Update this person</a>
+<br>
+<form th:method="DELETE" th:action="@{/person/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete this person">
+</form>
+<div>
+    <p id="start">Книги:</p>
+    <p th:each="book: ${books}"
+       th:style="${book.getFlag() == true} ? 'background-color: red;'"
+       th:text="${book.getName() + ': '
+    + book.getAuthor()+ ' (' + book.getDateIssue() + ')'}"></p>
+
+
+</div>
+</body>
+</html>

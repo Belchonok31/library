@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск книги по первым буквам</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/book/search}">
+    <label for="text">Введите поисковый запрос </label>
+    <input type="text" id="text" name="input_text">
+    <input type="submit" value="Искать">
+</form>
+<div th:if="${books}" th:each="book: ${books}">
+       <p th:text="${book.getName() + ': '
+    + book.getAuthor()+ ' (' + book.getDateIssue() + ')'}"></p>
+    <p th:if="${book.getOwner()!=null}" th:text="${'Книга находится у: ' + book.getOwner().getFullName()}">Text simple</p>
+    <p th:if="${book.getOwner()==null}">Книга сейчас свободна</p>
+</div>
+<p th:if="${books.isEmpty()}">Книг не найдено</p>
+</body>
+</html>
